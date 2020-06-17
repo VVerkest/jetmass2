@@ -40,8 +40,6 @@
 #include "TStarJetPicoTriggerInfo.h"
 #include "TStarJetPicoUtils.h"
 
-#include "TDatabasePDG.h"
-
 //#include "ktTrackEff.hh"
 #include <string>
 #include <utility>      // std::pair
@@ -82,7 +80,7 @@ namespace Analysis {
   double LookupRun12Xsec(TString);
   
   //converts tstarjetvectors into pseudojets for later clustering into jets; also assigns particle masses
-  void GatherParticles (TStarJetVectorContainer<TStarJetVector> *, TStarJetVector*, std::vector<fastjet::PseudoJet> &, const bool, const bool, TDatabasePDG*);
+  void GatherParticles (TStarJetVectorContainer<TStarJetVector> *, TStarJetVector*, std::vector<fastjet::PseudoJet> &, const bool, const bool );
 
   //accepts jets which pass a neutral energy fraction cut
   void ApplyNEFSelection (const std::vector<fastjet::PseudoJet>, std::vector<fastjet::PseudoJet> &);

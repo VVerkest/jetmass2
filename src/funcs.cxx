@@ -211,7 +211,7 @@ namespace Analysis {
   //This function simply converts TStarJetVectors from the event into PseudoJets for later clustering into jets with FastJet.
   //It also very importantly assigns a mass to each particle after the conversion.
   //The assigned mass is dependent on whether the function call is for particle-level (e.g. Pythia) [where we know the rest masses] or detector-level (e.g. Geant, data) [where we don't know them].
-  void GatherParticles ( TStarJetVectorContainer<TStarJetVector> * container, TStarJetVector *sv, std::vector<fastjet::PseudoJet> & Particles, const bool full, const bool py, TDatabasePDG *pdg){
+  void GatherParticles ( TStarJetVectorContainer<TStarJetVector> * container, TStarJetVector *sv, std::vector<fastjet::PseudoJet> & Particles, const bool full, const bool py ){
     for ( int i = 0; i < container->GetEntries() ; ++i ) {
       sv = container->Get(i);
       fastjet::PseudoJet current = fastjet::PseudoJet( *sv );
@@ -223,7 +223,7 @@ namespace Analysis {
         current.reset_PtYPhiM(sqrt(current.perp2()),current.rap(),current.phi(), 0); //neutral particles massless!
       }
       else if (py) { // at particle-level -> PDG mass
-        current.reset_PtYPhiM(sqrt(current.perp2()), current.rap(), current.phi(), pdg->GetParticle(sv->mc_pdg_pid())->Mass());
+        current.reset_PtYPhiM(sqrt(current.perp2()), current.rap(), current.phi(), 0/*pdg->GetParticle(sv->mc_pdg_pid())->Mass()*/);
       }
       //DEBUG:
       //std::cout << "Particle-level? " << py << std::endl << "ASSIGNING MASS " << current.m() << " TO CONSTITUENT " << i << " WITH CHARGE " << sv->GetCharge() << " AND MASS " << sv->GetPicoMass() << std::endl;
