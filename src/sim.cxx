@@ -167,7 +167,7 @@ int main (int argc, const char ** argv) {
   TStarJetPicoEventHeader* p_header;
   TStarJetPicoEvent* p_event;
   TStarJetVectorContainer<TStarJetVector>* p_container;
-  TStarJetVector* p_sv;
+  TStarJetVector* p_sv = new TStarJetVector();
   
   TString geantFilename;
   TStarJetPicoEventHeader* g_header;
@@ -341,34 +341,34 @@ int main (int argc, const char ** argv) {
   //1D m responses for systematics: prior smearing
   //  RooUnfoldResponse *m_res1520_nom = new RooUnfoldResponse(14,0,14,14,0,14,"m_res1520_nom","");
   RooUnfoldResponse *m_res2025_nom = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2025_nom","");
-  RooUnfoldResponse *m_res2530_nom = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2530_nom","");
+  RooUnfoldResponse *m_res2030_nom = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2030_nom","");
   RooUnfoldResponse *m_res3040_nom = new RooUnfoldResponse(14,0,14,14,0,14,"m_res3040_nom","");
   //RooUnfoldResponse *m_res4060_nom = new RooUnfoldResponse(14,0,14,14,0,14,"m_res4060_nom","");
   //RooUnfoldResponse *m_res1520_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res1520_p8smear","");
   RooUnfoldResponse *m_res2025_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2025_p8smear","");
-  RooUnfoldResponse *m_res2530_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2530_p8smear","");
+  RooUnfoldResponse *m_res2030_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2030_p8smear","");
   RooUnfoldResponse *m_res3040_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res3040_p8smear","");
   //RooUnfoldResponse *m_res4060_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res4060_p8smear","");
   //RooUnfoldResponse *m_res1520_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res1520_h7smear","");
   RooUnfoldResponse *m_res2025_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2025_h7smear","");
-  RooUnfoldResponse *m_res2530_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2530_h7smear","");
+  RooUnfoldResponse *m_res2030_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res2030_h7smear","");
   RooUnfoldResponse *m_res3040_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res3040_h7smear","");
   //RooUnfoldResponse *m_res4060_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"m_res4060_h7smear","");
   
   //1D mg responses for systematics: prior smearing
   //  RooUnfoldResponse *mg_res1520_nom = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res1520_nom","");
   RooUnfoldResponse *mg_res2025_nom = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2025_nom","");
-  RooUnfoldResponse *mg_res2530_nom = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2530_nom","");
+  RooUnfoldResponse *mg_res2030_nom = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2030_nom","");
   RooUnfoldResponse *mg_res3040_nom = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res3040_nom","");
   //RooUnfoldResponse *mg_res4060_nom = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res4060_nom","");
   //RooUnfoldResponse *mg_res1520_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res1520_p8smear","");
   RooUnfoldResponse *mg_res2025_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2025_p8smear","");
-  RooUnfoldResponse *mg_res2530_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2530_p8smear","");
+  RooUnfoldResponse *mg_res2030_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2030_p8smear","");
   RooUnfoldResponse *mg_res3040_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res3040_p8smear","");
   //RooUnfoldResponse *mg_res4060_p8smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res4060_p8smear","");
   //RooUnfoldResponse *mg_res1520_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res1520_h7smear","");
   RooUnfoldResponse *mg_res2025_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2025_h7smear","");
-  RooUnfoldResponse *mg_res2530_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2530_h7smear","");
+  RooUnfoldResponse *mg_res2030_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res2030_h7smear","");
   RooUnfoldResponse *mg_res3040_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res3040_h7smear","");
   //RooUnfoldResponse *mg_res4060_h7smear = new RooUnfoldResponse(14,0,14,14,0,14,"mg_res4060_h7smear","");
   
@@ -397,8 +397,8 @@ int main (int argc, const char ** argv) {
     
   std::vector<RooUnfoldResponse*> sampleB_res = {sampleB_pt_response,sampleB_m_response,sampleB_zg_response,sampleB_rg_response,sampleB_ptg_response,sampleB_mg_response,sampleB_m_pt_response,sampleB_m_pt_response_counts,sampleB_zg_pt_response,sampleB_rg_pt_response,sampleB_ptg_pt_response,sampleB_mg_pt_response,sampleB_mg_pt_response_counts};
   
-  std::vector<RooUnfoldResponse*> syst_msmear = {/*m_res1520_nom,*/m_res2025_nom,m_res2530_nom,m_res3040_nom,/*m_res4060_nom,m_res1520_p8smear,*/m_res2025_p8smear,m_res2530_p8smear,m_res3040_p8smear,/*m_res4060_p8smear,m_res1520_h7smear,*/m_res2025_h7smear,m_res2530_h7smear,m_res3040_h7smear,/*m_res4060_h7smear*/};
-  std::vector<RooUnfoldResponse*> syst_mgsmear = {/*mg_res1520_nom,*/mg_res2025_nom,mg_res2530_nom,mg_res3040_nom,/*mg_res4060_nom,mg_res1520_p8smear,*/mg_res2025_p8smear,mg_res2530_p8smear,mg_res3040_p8smear,/*mg_res4060_p8smear,mg_res1520_h7smear,*/mg_res2025_h7smear,mg_res2530_h7smear,mg_res3040_h7smear,/*mg_res4060_h7smear*/};
+  std::vector<RooUnfoldResponse*> syst_msmear = {/*m_res1520_nom,*/m_res2025_nom,m_res2030_nom,m_res3040_nom,/*m_res4060_nom,m_res1520_p8smear,*/m_res2025_p8smear,m_res2030_p8smear,m_res3040_p8smear,/*m_res4060_p8smear,m_res1520_h7smear,*/m_res2025_h7smear,m_res2030_h7smear,m_res3040_h7smear,/*m_res4060_h7smear*/};
+  std::vector<RooUnfoldResponse*> syst_mgsmear = {/*mg_res1520_nom,*/mg_res2025_nom,mg_res2030_nom,mg_res3040_nom,/*mg_res4060_nom,mg_res1520_p8smear,*/mg_res2025_p8smear,mg_res2030_p8smear,mg_res3040_p8smear,/*mg_res4060_p8smear,mg_res1520_h7smear,*/mg_res2025_h7smear,mg_res2030_h7smear,mg_res3040_h7smear,/*mg_res4060_h7smear*/};
 
     
   std::vector<RooUnfoldResponse*> syst_res = {m_pt_res_nom,m_pt_res_TS,m_pt_res_TU,m_pt_res_HC50,m_pt_res_DS,m_pt_res_GS};
@@ -418,9 +418,6 @@ int main (int argc, const char ** argv) {
   //Creating SoftDrop grooming object
   contrib::SoftDrop sd(Beta,z_cut,R0);
   cout << "SoftDrop groomer is: " << sd.description() << endl;
-  
-  //for later use looking up PDG masses using particle PID
-  TDatabasePDG *pdg = new TDatabasePDG();
   
   //  gRandom->SetSeed(1);//for consistency check with v1. Not needed otherwise.
   
@@ -552,8 +549,8 @@ int main (int argc, const char ** argv) {
       }
       
       // converts TStarJetVectors to PseudoJets, carefully assigning the proper particle mass in either case
-      GatherParticles ( p_container, p_sv, p_Particles, full, 1, pdg); //Pythia; full = 0 => charged-only, 1 => ch+ne
-      GatherParticles ( g_container, g_sv, g_Particles, full, 0, pdg); //GEANT
+      GatherParticles ( p_container, p_sv, p_Particles, full, 1 ); //Pythia; full = 0 => charged-only, 1 => ch+ne
+      GatherParticles ( g_container, g_sv, g_Particles, full, 0 ); //GEANT
       
       if (iSyst == 2) {//varying the tracking efficiency randomly by 4%
 	double effic_num;
@@ -764,7 +761,7 @@ int main (int argc, const char ** argv) {
 	    prior_adjust_p8g = mgp8[j]->GetBinContent(mgp8[j]->GetXaxis()->FindBin(p_GroomedJets[miss_indices[i]].m()));
 	    
 	    if (j == 0) {
-	      m_res2030_nom->Miss(misses[i].m(), mc_weight);
+	      m_res2025_nom->Miss(misses[i].m(), mc_weight);
 	      m_res2030_h7smear->Miss(misses[i].m(), mc_weight * prior_adjust_h7);
 	      m_res2030_p8smear->Miss(misses[i].m(), mc_weight * prior_adjust_p8);
 	      mg_res2030_nom->Miss(p_GroomedJets[miss_indices[i]].m(), mc_weight);
@@ -773,12 +770,12 @@ int main (int argc, const char ** argv) {
 
 	    }
 	    if (j == 1) {
-	      m_res3045_nom->Miss(misses[i].m(), mc_weight);
-	      m_res3045_h7smear->Miss(misses[i].m(), mc_weight * prior_adjust_h7);
-	      m_res3045_p8smear->Miss(misses[i].m(), mc_weight * prior_adjust_p8);
-	      mg_res3045_nom->Miss(p_GroomedJets[miss_indices[i]].m(), mc_weight);
-	      mg_res3045_h7smear->Miss(p_GroomedJets[miss_indices[i]].m(), mc_weight * prior_adjust_h7g);
-	      mg_res3045_p8smear->Miss(p_GroomedJets[miss_indices[i]].m(), mc_weight * prior_adjust_p8g);
+	      m_res3040_nom->Miss(misses[i].m(), mc_weight);
+	      m_res3040_h7smear->Miss(misses[i].m(), mc_weight * prior_adjust_h7);
+	      m_res3040_p8smear->Miss(misses[i].m(), mc_weight * prior_adjust_p8);
+	      mg_res3040_nom->Miss(p_GroomedJets[miss_indices[i]].m(), mc_weight);
+	      mg_res3040_h7smear->Miss(p_GroomedJets[miss_indices[i]].m(), mc_weight * prior_adjust_h7g);
+	      mg_res3040_p8smear->Miss(p_GroomedJets[miss_indices[i]].m(), mc_weight * prior_adjust_p8g);
 	    }
 	  }
 	  
@@ -799,7 +796,7 @@ int main (int argc, const char ** argv) {
 	    prior_adjust_p8g = mgp8[j]->GetBinContent(mp8[j]->GetXaxis()->FindBin(p_GroomedJets[match_indices[2*i]].m()));
 	    
 	    if (g_matches[i].pt() > 20 && g_matches[i].pt() < 30) {
-	      m_res2030_nom->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight);
+	      m_res2025_nom->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight);
 	      m_res2030_h7smear->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight * prior_adjust_h7);
 	      m_res2030_p8smear->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight * prior_adjust_p8);
 	      mg_res2030_nom->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight);
@@ -807,12 +804,12 @@ int main (int argc, const char ** argv) {
 	      mg_res2030_p8smear->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight * prior_adjust_p8g);
 	    }
 	    else if (g_matches[i].pt() > 30 && g_matches[i].pt() < 45) {
-	      m_res3045_nom->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight);
-	      m_res3045_h7smear->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight * prior_adjust_h7);
-	      m_res3045_p8smear->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight * prior_adjust_p8);
-	      mg_res3045_nom->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight);
-	      mg_res3045_h7smear->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight * prior_adjust_h7g);
-	      mg_res3045_p8smear->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight * prior_adjust_p8g);
+	      m_res3040_nom->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight);
+	      m_res3040_h7smear->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight * prior_adjust_h7);
+	      m_res3040_p8smear->Fill(g_matches[i].m(),p_matches[i].m(),mc_weight * prior_adjust_p8);
+	      mg_res3040_nom->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight);
+	      mg_res3040_h7smear->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight * prior_adjust_h7g);
+	      mg_res3040_p8smear->Fill(g_GroomedJets[match_indices[(2*i)+1]].m(),p_GroomedJets[match_indices[2*i]].m(),mc_weight * prior_adjust_p8g);
 	    }
 	    
 	  }//loop over matches
@@ -820,7 +817,7 @@ int main (int argc, const char ** argv) {
 	  for (int i = 0; i < fakes.size(); ++ i) {
 
 	    if (fakes[i].pt() > 20 && fakes[i].pt() < 30) {
-	      m_res2030_nom->Fake(fakes[i].m(),mc_weight);
+	      m_res2025_nom->Fake(fakes[i].m(),mc_weight);
 	      m_res2030_h7smear->Fake(fakes[i].m(),mc_weight);
 	      m_res2030_p8smear->Fake(fakes[i].m(),mc_weight);
 	      mg_res2030_nom->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
@@ -828,12 +825,12 @@ int main (int argc, const char ** argv) {
 	      mg_res2030_p8smear->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
 	    }
 	    if (fakes[i].pt() > 30 && fakes[i].pt() < 45) {
-	      m_res3045_nom->Fake(fakes[i].m(),mc_weight);
-	      m_res3045_h7smear->Fake(fakes[i].m(),mc_weight);
-	      m_res3045_p8smear->Fake(fakes[i].m(),mc_weight);
-	      mg_res3045_nom->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
-	      mg_res3045_h7smear->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
-	      mg_res3045_p8smear->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
+	      m_res3040_nom->Fake(fakes[i].m(),mc_weight);
+	      m_res3040_h7smear->Fake(fakes[i].m(),mc_weight);
+	      m_res3040_p8smear->Fake(fakes[i].m(),mc_weight);
+	      mg_res3040_nom->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
+	      mg_res3040_h7smear->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
+	      mg_res3040_p8smear->Fake(g_GroomedJets[fake_indices[i]].m(), mc_weight);
 	    }
 	    
 	  }//loop over fakes
