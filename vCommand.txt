@@ -1,0 +1,1 @@
+./submit/analyze.csh sim BBCMB pA 04 full full matched
