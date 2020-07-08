@@ -11,6 +11,7 @@
 #include "fastjet/contrib/SoftDrop.hh"
 
 #include "RooUnfold.h"
+#include "RooUnfoldTUnfold.h"
 
 #include "TROOT.h"
 #include "TRandom.h"
