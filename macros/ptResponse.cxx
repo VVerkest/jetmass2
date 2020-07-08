@@ -119,7 +119,7 @@ int main () {
     hWtUEpt[p] = new TH1D(name,title,30,0.0,30.0);
   }
 
-
+  
   can->SetLogy();
   for (int i=0; i<55; ++i) {  // det-level fractional pT contribution to part-level pT --> fc(pT_det)
     int ptVal = i + 5;
@@ -153,8 +153,30 @@ int main () {
   can->BuildLegend(0.75,0.1,0.9,0.9);
   can->SaveAs("plots/detUEpt.pdf","PDF");
 
+
+  TFile *ef = new TFile( "src/trackeffic.root", "READ" );
+
+  TH1D *hEffic = (TH1D*)ef->Get( "eff_s_bin_1_10_bbc__1_10_eta" );
+
+  double pt, eta, phi, e, px, py, pz, effic, corrPt, corrErr;
+  int ptBin;//, etaBin;
+
+  
   for (int p=0; p<nPtBins; ++p) {
 
+    for ( int i=1; i<=hWtUEpt[p]->GetNbinsX(); ++i ) {
+
+      pt = hWtUEpt[p]->GetBinCenter(i);  // loop over chg UE pT bins
+      if ( pt > 3.0 ) { pt = 3.0; }
+      for ( int j=0; j<72; ++j ) { ptBin = hEffic->FindBin( pt ); }    // find histogram bin corresponding to track pt
+      effic = hEffic->GetBinContent( ptBin );
+      corrPt = pt/effic;                                               // calculate corrected bin content and error
+      corrErr = hWtUEpt[p]->GetBinError(i)/effic;                      // (divide pT and error by efficiency)
+
+      hWtUEpt[p]->SetBinContent( i, corrPt );
+      hWtUEpt[p]->SetBinError( i, corrErr );
+    }
+    
     hWtUEpt[p]->Draw();
 
     TString text = "#LT p_{T}^{ch}#GT = "; text += hWtUEpt[p]->GetMean(1);
