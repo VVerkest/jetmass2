@@ -226,7 +226,7 @@ int main (int argc, const char ** argv) {
       
       //if we require matching, must have an event in both P+G and P
       if ( match && GEANTReader->ReadEvent(p_EventID) != 1 ) {
-	/*cout << "no corresponding geant event...skipping event " << p_eventID <<endl;*/
+	// cout << "no corresponding geant event...skipping event " << p_EventID <<endl;
 	continue;//goes to the next event
       }
       //sanity check:
@@ -243,6 +243,33 @@ int main (int argc, const char ** argv) {
       g_event = GEANTReader->GetEvent();
       g_header = g_event->GetHeader();
       
+      if (!(g_header->HasTriggerId(500205) || g_header->HasTriggerId(500215))) {continue;}   //  ONLY SELECT HT TRIGGER EVENTS
+
+      TList *SelectedTowers = GEANTReader->GetListOfSelectedTowers();
+      int nTowers = CountTowers( SelectedTowers );
+
+      int trigTowId;
+      TStarJetPicoTriggerInfo *trig;
+      TStarJetPicoTower *tow, *triggerTower;
+      double trigTowEt = 0.0;
+      std::vector<int> trigTowers;
+      for ( int i=0; i<g_event->GetTrigObjs()->GetEntries(); ++i ) {
+	trig = (TStarJetPicoTriggerInfo *)g_event->GetTrigObj(i);
+	if ( trig->isBHT2() && UseTriggerTower( trig->GetId()) ) { trigTowers.push_back( trig->GetId() ); }
+      }
+      sort(trigTowers.begin(), trigTowers.end());
+
+      int nmatched = 0;
+      for (int i=0; i<nTowers; ++i){				// loop throught selected towers in event
+	tow = (TStarJetPicoTower*)SelectedTowers->At(i);
+	if ( !(tow->GetEt()>=5.4 && count(trigTowers.begin(), trigTowers.end(), tow->GetId()))) { // min 5.4 GeV tower and must be in list of HT towers
+	  
+	}
+      }
+
+
+
+      
       p_container = P6Reader->GetOutputContainer();
       g_container = GEANTReader->GetOutputContainer();
     
@@ -251,8 +278,8 @@ int main (int argc, const char ** argv) {
       
       if (match && (pythiaFilename != geantFilename)) {std::cerr << "FILES DON'T MATCH! EXITING." << std::endl; exit(1);}
  
-      p_wt = LookupRun12Xsec( pythiaFilename );
-      g_wt = LookupRun12Xsec( geantFilename );
+      p_wt = LookupRun15Xsec( pythiaFilename );
+      g_wt = LookupRun15Xsec( geantFilename );
       if (match && (p_wt != g_wt)) {std::cerr << "WEIGHTS DON'T MATCH! EXITING." << std::endl; exit(1);}
       mc_weight = p_wt; //arbitrarily setting it to pythia's but can be either
       
@@ -309,7 +336,7 @@ int main (int argc, const char ** argv) {
       p_n_jets = p_Jets.size();
       g_n_jets = g_Jets.size();
       
-      if (DiscardEvent(pythiaFilename, p_Jets, g_Jets)) { counter_debug ++; continue; }
+      if (DiscardEmbedEvent(pythiaFilename, p_Jets, g_Jets)) { counter_debug ++; continue; }
 
       if ( p_Jets.size()==0 || g_Jets.size()==0 ) { continue; }
       
@@ -394,7 +421,7 @@ int main (int argc, const char ** argv) {
 	  //determine on a per-jet basis the pT and M smearing for the systematic prior variation
 	  
 	  pt_response->Miss(misses[0].pt(), mc_weight);
-	  hMisses->Fill(misses[0].pt());
+	  hMisses->Fill(misses[0].pt(), mc_weight);
 
 	  if (match && p_EventID % 2 == 0) { //throughout this section, checking if (match) is unnecessary because of the overall conditional
 	    sampleA_pt_response->Miss(misses[0].pt(), mc_weight);
@@ -434,7 +461,7 @@ int main (int argc, const char ** argv) {
 	// }//for loop over matches
             
 	if ( fakes.size()!=0 ) {
-	  hFakes->Fill(fakes[0].pt());
+	  hFakes->Fill(fakes[0].pt(), mc_weight);
 	  pt_response->Fake(fakes[0].pt(), mc_weight);
 	  //closure sampleA responses
 	  if (match && p_EventID % 2 == 0) {
